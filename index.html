@@ -294,13 +294,7 @@
           <h2>Receba acesso antecipado</h2>
           <p>Deixe seus dados para demonstrar interesse e validar essa solução.</p>
 
-          <!--
-            Para capturar leads de verdade após publicar, você pode trocar o form por um destes modelos:
-            1) FormSubmit: action="https://formsubmit.co/SEUEMAIL"
-            2) Netlify Forms: adicionar name="leads" data-netlify="true"
-            3) Google Forms: incorporar o formulário na página
-          -->
-          <form id="leadForm">
+          <form id="leadForm" action="https://formsubmit.co/SEU_EMAIL_AQUI@gmail.com" method="POST">
             <input type="text" name="nome" placeholder="Seu nome" required>
             <input type="email" name="email" placeholder="Seu melhor e-mail" required>
             <select name="perfil" required>
@@ -311,9 +305,15 @@
               <option>Mudando de carreira para TI</option>
             </select>
             <textarea name="objetivo" rows="4" placeholder="Qual sua maior dificuldade hoje para conseguir uma vaga?"></textarea>
+
+            <input type="hidden" name="_subject" value="Novo lead da landing page MVP">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_replyto" value="email">
+
             <button type="submit">Enviar</button>
           </form>
-          <div id="successMessage">Cadastro enviado com sucesso. Seu interesse foi registrado nesta demonstração.</div>
+          <div id="successMessage" style="display:block;">Antes de publicar: troque <strong>nicolaseconds@gmail.com</strong> pelo seu e-mail no código. Depois, cada envio chegará no seu e-mail e você poderá contar os leads.</div>
         </div>
       </div>
     </section>
@@ -386,23 +386,5 @@
     </div>
   </footer>
 
-  <script>
-    const form = document.getElementById('leadForm');
-    const successMessage = document.getElementById('successMessage');
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const formData = new FormData(form);
-      const lead = Object.fromEntries(formData.entries());
-
-      const leads = JSON.parse(localStorage.getItem('leads_mvp_ti') || '[]');
-      leads.push({ ...lead, data: new Date().toISOString() });
-      localStorage.setItem('leads_mvp_ti', JSON.stringify(leads));
-
-      form.reset();
-      successMessage.style.display = 'block';
-    });
-  </script>
 </body>
 </html>
