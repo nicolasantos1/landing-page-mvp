@@ -15,6 +15,10 @@
       --accent-dark: #0ea5e9;
       --success: #22c55e;
       --white: #ffffff;
+      --field-bg: rgba(255,255,255,0.96);
+      --field-text: #0f172a;
+      --field-placeholder: #64748b;
+      --field-border: rgba(15,23,42,0.12);
     }
 
     * { box-sizing: border-box; }
@@ -146,15 +150,34 @@
 
     input, select, textarea, button {
       width: 100%;
-      border: 1px solid rgba(255,255,255,0.14);
       border-radius: 12px;
       padding: 14px 14px;
-      background: rgba(255,255,255,0.08);
-      color: var(--white);
       font-size: 0.98rem;
+      font-family: inherit;
     }
 
-    input::placeholder, textarea::placeholder { color: #cbd5e1; }
+    input,
+    select,
+    textarea {
+      border: 1px solid var(--field-border);
+      background: var(--field-bg);
+      color: var(--field-text);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--field-placeholder);
+    }
+
+    select {
+      appearance: auto;
+      color: var(--field-text);
+    }
+
+    select option {
+      color: var(--field-text);
+      background: #ffffff;
+    }
 
     button {
       cursor: pointer;
@@ -167,6 +190,12 @@
     button:hover {
       background: var(--accent-dark);
       color: var(--white);
+    }
+
+    .form-help {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: var(--muted);
     }
 
     section {
@@ -236,17 +265,6 @@
       font-size: 0.92rem;
     }
 
-    #successMessage {
-      display: none;
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: rgba(34, 197, 94, 0.14);
-      border: 1px solid rgba(34, 197, 94, 0.4);
-      color: #dcfce7;
-      font-size: 0.95rem;
-    }
-
     @media (max-width: 900px) {
       .hero,
       .grid-3,
@@ -294,26 +312,24 @@
           <h2>Receba acesso antecipado</h2>
           <p>Deixe seus dados para demonstrar interesse e validar essa solução.</p>
 
-          <form id="leadForm" action="https://formsubmit.co/SEU_EMAIL_AQUI@gmail.com" method="POST">
+          <form action="https://formsubmit.co/nicolaseconds@gmail.com" method="POST">
             <input type="text" name="nome" placeholder="Seu nome" required>
             <input type="email" name="email" placeholder="Seu melhor e-mail" required>
             <select name="perfil" required>
-              <option value="">Qual é o seu perfil?</option>
-              <option>Estudante de TI</option>
-              <option>Buscando estágio</option>
-              <option>Buscando vaga júnior</option>
-              <option>Mudando de carreira para TI</option>
+              <option value="" selected disabled>Qual é o seu perfil?</option>
+              <option value="Estudante de TI">Estudante de TI</option>
+              <option value="Buscando estágio">Buscando estágio</option>
+              <option value="Buscando vaga júnior">Buscando vaga júnior</option>
+              <option value="Mudando de carreira para TI">Mudando de carreira para TI</option>
             </select>
             <textarea name="objetivo" rows="4" placeholder="Qual sua maior dificuldade hoje para conseguir uma vaga?"></textarea>
 
             <input type="hidden" name="_subject" value="Novo lead da landing page MVP">
             <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_replyto" value="email">
 
             <button type="submit">Enviar</button>
           </form>
-          <div id="successMessage" style="display:block;">Antes de publicar: troque <strong>nicolaseconds@gmail.com</strong> pelo seu e-mail no código. Depois, cada envio chegará no seu e-mail e você poderá contar os leads.</div>
+          <div class="form-help">Após o primeiro envio, confirme o e-mail de ativação do FormSubmit na sua caixa de entrada ou spam.</div>
         </div>
       </div>
     </section>
